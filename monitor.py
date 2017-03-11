@@ -5,6 +5,7 @@ import sys
 safe_pids = []
 def monitor():
 	file_to_check = sys.argv[1]
+	print file_to_check
 	global safe_pids
 	for proc in psutil.process_iter():
 		try:
@@ -17,7 +18,6 @@ def monitor():
 				for files in proci.open_files() :
 					#print files.path
 					#handles = re.match(my_regex, files, re.IGNORECASE)
-					print files
 					if file_to_check in files.path:
 						if pinfo['pid'] in safe_pids:
 							return False, 0
