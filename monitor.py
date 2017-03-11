@@ -14,7 +14,6 @@ def monitor():
 		else:
 			try:
 				proci = psutil.Process(pinfo['pid'])
-				print proci.open_files()
 				for files in proci.open_files() :
 					#print files.path
 					#handles = re.match(my_regex, files, re.IGNORECASE)
