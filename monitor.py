@@ -17,7 +17,7 @@ def monitor():
 				for files in proci.open_files() :
 					#print files.path
 					#handles = re.match(my_regex, files, re.IGNORECASE)
-					print file.path
+					print files
 					if file_to_check in files.path:
 						if pinfo['pid'] in safe_pids:
 							return False, 0
