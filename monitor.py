@@ -18,11 +18,14 @@ def monitor():
 					#print files.path
 					#handles = re.match(my_regex, files, re.IGNORECASE)
 					if file_to_check in files.path:
+						'''
 						if pinfo['pid'] in safe_pids:
 							return False, 0
 						else:
 							safe_pids.append(pinfo['pid'])
 							return True, pinfo['pid']
+						'''
+						return True, pinfo['pid']
 					
 					#print match
 
