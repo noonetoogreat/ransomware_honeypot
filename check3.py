@@ -29,8 +29,8 @@ class RattailFileMonitor(Service):
 	_svc_display_name_ = u"Rattail : File Monitoring Service"
 	_svc_description_ = (u"Monitors one or more folders for incoming files, "
 						 u"and performs configured actions as new files arrive.")
-	print Service
-	def Initialize(self, config):
+
+	def __init__(self, config):
 
 		"""
 		Service initialization.
