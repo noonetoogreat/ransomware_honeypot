@@ -39,6 +39,7 @@ def main():
 			print "File being accessed at" + time.ctime() + " by process " + str(pid)
 
 if __name__ == '__main__':
+	print sys.argv
 	try:
 		main()
 	except KeyboardInterrupt as e:
