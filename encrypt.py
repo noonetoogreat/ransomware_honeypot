@@ -60,5 +60,6 @@ def main():
 			#with open(in_filename, 'rb') as in_file, open(out_filename, 'wb') as out_file:
 			#	decrypt(in_file, out_file, password)
 
+			
 if __name__ == '__main__':
 	main()
