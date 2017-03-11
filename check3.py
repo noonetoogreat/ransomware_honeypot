@@ -31,7 +31,6 @@ class RattailFileMonitor(Service):
 						 u"and performs configured actions as new files arrive.")
 
 	def __init__(self, config):
-		print config
 
 		"""
 		Service initialization.
