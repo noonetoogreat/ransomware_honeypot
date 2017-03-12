@@ -3,6 +3,7 @@ import time
 import sys
 import os
 import subprocess
+import threading
 
 safe_pids = []
 def monitor(file):
@@ -19,7 +20,6 @@ def monitor(file):
 				for files in proci.open_files() :
 					#print files.path
 					#handles = re.match(my_regex, files, re.IGNORECASE)
-					print files.path
 					if file in files.path:
 						'''
 						if pinfo['pid'] in safe_pids:
@@ -55,10 +55,15 @@ def monitor(file):
 
 def main():
 	while True:
-		file_to_check = sys.argv[1]
-		status = monitor(file_to_check)
-		if status == True:
-			break	
+		dir_to_check = sys.argv[1]
+		for subdir, dirs, files in os.walk(dir_to_check):
+			for file in files:
+				file_to_check = os.path.join(subdir, file)
+				file_to_check = os.path.abspath(file_to_check)
+				d = threading.Thread(target=monitor, args=(file_to_check, ))
+				d.setDaemon(True)
+				d.start()
+	
 
 if __name__ == '__main__':
 	try:
