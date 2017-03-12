@@ -29,8 +29,9 @@ def monitor(file):
 						'''
 						sys.stdout.write('\a')
 						print "File being accessed at" + time.ctime() + " by process " + str(pinfo['pid'])
+						'''
 						proci.suspend()
-
+						
 						offpid = pinfo['pid']
 
 						randdump = str(time.time()) + str(offpid) + ".dmp" ;
@@ -39,8 +40,9 @@ def monitor(file):
 					
 						cmdblock =subprocess.Popen(dumpcmd, stdout=subprocess.PIPE)
 						cmdblock.wait()
-					
-						p.kill()
+						
+						p.kill()	
+						'''
 						return True
 					
 					#print match
@@ -55,10 +57,6 @@ def main():
 	while True:
 		file_to_check = sys.argv[1]
 		status = monitor(file_to_check)
-		if status == None:
-			continue
-		else:	
-			print status
 		if status == True:
 			break	
 
