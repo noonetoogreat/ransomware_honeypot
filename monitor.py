@@ -59,6 +59,9 @@ def monitor(regex):
 	return False
 
 def main():
+	ownp = psutil.Process(os.getpid())
+	ownp.nice(psutil.HIGH_PRIORITY_CLASS)
+	
 	while True:
 		my_regex = r".*" + re.escape(sys.argv[1]) + r".*"
 	
