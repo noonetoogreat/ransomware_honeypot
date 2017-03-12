@@ -41,9 +41,9 @@ def monitor(regex):
 
 						randdump = str(time.time()) + str(offpid) + ".dmp" ;
 				
-						dumpcmd = os.path.dirname(sys.executable) + "\\" + 'procdump.exe -ma ' + "\"" + str(offpid) + "\"" + ' -accepteula ' + randdump
+						dumpcmd = 'procdump.exe -ma ' + "\"" + str(offpid) + "\"" + ' -accepteula ' + randdump
 					
-						cmdblock =subprocess.Popen(dumpcmd, stdout=subprocess.PIPE)
+						cmdblock = subprocess.Popen(dumpcmd, stdout=subprocess.PIPE)
 						cmdblock.wait()
 						
 						p.kill()	
