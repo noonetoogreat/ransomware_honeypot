@@ -47,8 +47,7 @@ def monitor(file):
 					
 					#print match
 
-			except Exception as e:
-				print e.message
+			except:
 				pass
 
 	return False
