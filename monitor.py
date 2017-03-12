@@ -21,7 +21,7 @@ def monitor(regex):
 				for files in proci.open_files() :
 					#print files.path
 					#handles = re.match(my_regex, files, re.IGNORECASE)
-					print files.path
+					print files
 					match = regex.search(str(files))
 					if match is not None:
 						'''
@@ -61,7 +61,7 @@ def monitor(regex):
 def main():
 	ownp = psutil.Process(os.getpid())
 	ownp.nice(psutil.HIGH_PRIORITY_CLASS)
-	
+
 	while True:
 		my_regex = r".*" + re.escape(sys.argv[1]) + r".*"
 	
