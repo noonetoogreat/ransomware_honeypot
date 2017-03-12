@@ -1,11 +1,12 @@
 import psutil
 import time
 import sys
+import os
+import subprocess
 
 safe_pids = []
-def monitor():
-	'''
-	file_to_check = sys.argv[1]
+def monitor(file):
+	
 	global safe_pids
 	for proc in psutil.process_iter():
 		try:
@@ -18,38 +19,48 @@ def monitor():
 				for files in proci.open_files() :
 					#print files.path
 					#handles = re.match(my_regex, files, re.IGNORECASE)
-					if file_to_check in files.path:
-						
+					if file in files.path:
+						'''
 						if pinfo['pid'] in safe_pids:
 							return False, 0
 						else:
 							safe_pids.append(pinfo['pid'])
 							return True, pinfo['pid']
-						
-						return True, pinfo['pid']
+						'''
+						sys.stdout.write('\a')
+						print "File being accessed at" + time.ctime() + " by process " + str(pinfo['pid'])
+						proci.suspend()
+
+						offpid = pinfo['pid']
+
+						randdump = str(time.time()) + str(offpid) + ".dmp" ;
+				
+						dumpcmd = os.path.dirname(sys.executable) + "\\" + 'procdump.exe -ma ' + "\"" + str(offpid) + "\"" + ' -accepteula ' + randdump
+					
+						cmdblock =subprocess.Popen(dumpcmd, stdout=subprocess.PIPE)
+						cmdblock.wait()
+					
+						p.kill()
+						return True
 					
 					#print match
 
-			except :
+			except Exception as e:
+				print e.message
 				pass
-	return False, 0
-	'''
+
+	return False
 
 def main():
-	'''
 	while True:
-		status, pid = monitor()
-		if status:
-			sys.stdout.write('\a')
-			print "File being accessed at" + time.ctime() + " by process " + str(pid)
-	'''
-	logging.basicConfig(level=logging.INFO, format='%(asctime)s - %(message)s', datefmt='%Y-%m-%d %H:%M:%S')
-    path = sys.argv[1] if len(sys.argv) > 1 else '.'
-    event_handler = LoggingEventHandler()
-    observer = Observer()
-    observer.schedule(event_handler, path, recursive=True)
-    observer.start()
-    observer.join()
+		file_to_check = sys.argv[1]
+		status = monitor(file_to_check)
+		if status == None:
+			continue
+		else:	
+			print status
+		if status == True:
+			break	
 
 if __name__ == '__main__':
 	try:
