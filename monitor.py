@@ -4,9 +4,10 @@ import sys
 import os
 import subprocess
 import threading
+import re
 
 safe_pids = []
-def monitor(file):
+def monitor(regex):
 	
 	global safe_pids
 	for proc in psutil.process_iter():
@@ -20,8 +21,11 @@ def monitor(file):
 				for files in proci.open_files() :
 					#print files.path
 					#handles = re.match(my_regex, files, re.IGNORECASE)
-					if file in files.path:
+					match = regex.search(str(files))
+					if match is not None:
 						'''
+						if file in files.path:
+						
 						if pinfo['pid'] in safe_pids:
 							return False, 0
 						else:
@@ -55,15 +59,13 @@ def monitor(file):
 
 def main():
 	while True:
-		dir_to_check = sys.argv[1]
-		for subdir, dirs, files in os.walk(dir_to_check):
-			for file in files:
-				file_to_check = os.path.join(subdir, file)
-				file_to_check = os.path.abspath(file_to_check)
-				d = threading.Thread(target=monitor, args=(file_to_check, ))
-				d.setDaemon(True)
-				d.start()
+		my_regex = r".*" + re.escape(sys.argv[1]) + r".*"
 	
+		regex = re.compile(my_regex, re.IGNORECASE)
+
+		status = monitor(regex)
+		if status == True:
+			return	
 
 if __name__ == '__main__':
 	try:
