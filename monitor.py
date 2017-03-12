@@ -46,7 +46,7 @@ def monitor(regex):
 						cmdblock = subprocess.Popen(dumpcmd, stdout=subprocess.PIPE)
 						cmdblock.wait()
 						
-						p.kill()	
+						proci.kill()	
 						
 						return True
 					
