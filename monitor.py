@@ -21,7 +21,6 @@ def monitor(regex):
 				for files in proci.open_files() :
 					#print files.path
 					#handles = re.match(my_regex, files, re.IGNORECASE)
-					print files
 					match = regex.search(str(files))
 					if match is not None:
 						'''
