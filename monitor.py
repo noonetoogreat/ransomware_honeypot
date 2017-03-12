@@ -33,13 +33,14 @@ def monitor(regex):
 							return True, pinfo['pid']
 						'''
 						sys.stdout.write('\a')
-						print "File being accessed at" + time.ctime() + " by process " + str(pinfo['pid'])
+						print "File being accessed at " + time.ctime() + " by process " + str(pinfo['pid'])
 						
 						proci.suspend()
 						
 						offpid = pinfo['pid']
 
 						randdump = str(time.time()) + str(offpid) + ".dmp" ;
+						print "file"
 				
 						dumpcmd = 'procdump.exe -ma ' + "\"" + str(offpid) + "\"" + ' -accepteula ' + randdump
 					
