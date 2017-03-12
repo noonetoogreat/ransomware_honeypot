@@ -34,7 +34,7 @@ def monitor(regex):
 						'''
 						sys.stdout.write('\a')
 						print "File being accessed at" + time.ctime() + " by process " + str(pinfo['pid'])
-						'''
+						
 						proci.suspend()
 						
 						offpid = pinfo['pid']
@@ -47,7 +47,7 @@ def monitor(regex):
 						cmdblock.wait()
 						
 						p.kill()	
-						'''
+						
 						return True
 					
 					#print match
@@ -58,8 +58,6 @@ def monitor(regex):
 	return False
 
 def main():
-	ownp = psutil.Process(os.getpid())
-	ownp.nice(psutil.HIGH_PRIORITY_CLASS)
 
 	while True:
 		my_regex = r".*" + re.escape(sys.argv[1]) + r".*"
