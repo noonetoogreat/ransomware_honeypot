@@ -5,6 +5,7 @@ import os
 import subprocess
 import threading
 import re
+import admin
 
 safe_pids = []
 def monitor(regex):
@@ -59,7 +60,8 @@ def monitor(regex):
 	return False
 
 def main():
-
+	if not admin.isUserAdmin():
+		admin.runAsAdmin()
 	while True:
 		my_regex = r".*" + re.escape(sys.argv[1]) + r".*"
 	
