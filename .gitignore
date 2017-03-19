@@ -4,3 +4,5 @@ test.txt
 *.sh
 volatility
 *.raw
+/dump
+*.img
