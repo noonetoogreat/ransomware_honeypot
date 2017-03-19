@@ -41,7 +41,7 @@ def monitor(regex):
 						offpid = pinfo['pid']
 
 						randdump = str(time.time()) + str(offpid) + ".dmp" ;
-						print "Dumpfile: " + 
+						print "Dumpfile: " + randdump
 				
 						dumpcmd = 'procdump.exe -ma ' + "\"" + str(offpid) + "\"" + ' -accepteula ' + randdump
 					
