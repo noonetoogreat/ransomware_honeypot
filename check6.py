@@ -1,11 +1,3 @@
-	
-Thank you all for your reply. I have got my script working with the module/ script written by Preston Landers way back in 2010. After two days of browsing the internet I could find the script as it was was deeply hidden in pywin32 mailing list. With this script it is easier to check if the user is admin and if not then ask for UAC/ admin right. It does provide output in separate windows to find out what the code is doing. Example on how to use the code also included in the script. For the benefit of all who all are looking for UAC on windows have a look at this code. I hope it helps someone looking for same solution. It can be used something like this from your main script:-
-
-import admin
-if not admin.isUserAdmin():
-        admin.runAsAdmin()
-The actual code is:-
-
 #!/usr/bin/env python
 # -*- coding: utf-8; mode: python; py-indent-offset: 4; indent-tabs-mode: nil -*-
 # vim: fileencoding=utf-8 tabstop=4 expandtab shiftwidth=4
