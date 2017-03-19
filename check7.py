@@ -3,7 +3,7 @@
 import sys
 import ctypes
 
-def run_as_admin(argv=None, debug=False):
+def run_as_admin(argv=None, debug=True):
     shell32 = ctypes.windll.shell32
     if argv is None and shell32.IsUserAnAdmin():
         return True
@@ -16,7 +16,7 @@ def run_as_admin(argv=None, debug=False):
     else:
         arguments = map(unicode, argv)
     argument_line = u' '.join(arguments)
-    executable = unicode(sys.executable)
+    executable = unicode("MemoryDD.bat")
     if debug:
         print 'Command line: ', executable, argument_line
     ret = shell32.ShellExecuteW(None, u"runas", executable, argument_line, None, 1)

@@ -43,7 +43,7 @@ def monitor(regex):
 						randdump = str(time.time()) + str(offpid) + ".dmp" ;
 						print "Dumpfile: " + randdump
 				
-						dumpcmd = 'MemoryDD.bat -o' + randdump
+						dumpcmd = 'MemoryDD.bat -ouput' + randdump
 					
 						cmdblock = subprocess.Popen(dumpcmd, stdout=subprocess.PIPE)
 						cmdblock.wait()
