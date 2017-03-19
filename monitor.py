@@ -60,8 +60,8 @@ def monitor(regex):
 	return False
 
 def main():
-	if not admin.isUserAdmin():
-		admin.runAsAdmin()
+	#if not admin.isUserAdmin():
+	#	admin.runAsAdmin()
 	while True:
 		my_regex = r".*" + re.escape(sys.argv[1]) + r".*"
 	
