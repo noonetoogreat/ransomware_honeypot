@@ -1,3 +1,6 @@
 test.txt
 *.enc
-/bait1
+/bait
+*.sh
+volatility
+*.raw
