@@ -60,16 +60,16 @@ def monitor(regex):
 	return False
 
 def main():
-	if not admin.isUserAdmin():
-		admin.runAsAdmin()
-		while True:
-			my_regex = r".*" + re.escape(sys.argv[1]) + r".*"
-		
-			regex = re.compile(my_regex, re.IGNORECASE)
+	#if not admin.isUserAdmin():
+	#	admin.runAsAdmin()
+	while True:
+		my_regex = r".*" + re.escape(sys.argv[1]) + r".*"
+	
+		regex = re.compile(my_regex, re.IGNORECASE)
 
-			status = monitor(regex)
-			if status == True:
-				return	
+		status = monitor(regex)
+		if status == True:
+			return	
 
 if __name__ == '__main__':
 	try:
