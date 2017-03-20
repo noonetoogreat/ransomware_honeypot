@@ -44,9 +44,10 @@ def monitor(regex):
 						print "Dumpfile: " + randdump
 				
 						dumpcmd = 'ProcessDD.bat -p ' + str(offpid) + ' -ouput ./' + randdump
-	#						
-						cmdblock = subprocess.call(['runas', '/user:Administrator', dumpcmd])
-						cmdblock.wait()
+	#					
+						admin.command(dumpcmd)	
+						#cmdblock = subprocess.call(['runas', '/user:Administrator', dumpcmd])
+						#cmdblock.wait()
 						
 						proci.kill()	
 						
