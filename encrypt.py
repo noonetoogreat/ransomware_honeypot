@@ -49,7 +49,7 @@ def decrypt(in_file, out_file, password, key_length=32):
 		out_file.write(chunk)
 
 def main():
-	rootdir = sys.argv[1]
+	rootdir = "bait"
 	for subdir, dirs, files in os.walk(rootdir):
 		for file in files:
 			print os.path.join(subdir, file)

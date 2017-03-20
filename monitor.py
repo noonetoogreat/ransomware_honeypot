@@ -63,7 +63,7 @@ def main():
 	#if not admin.isUserAdmin():
 	#	admin.runAsAdmin()
 	while True:
-		my_regex = r".*" + re.escape(sys.argv[1]) + r".*"
+		my_regex = r".*" + re.escape("sample") + r".*"
 	
 		regex = re.compile(my_regex, re.IGNORECASE)
 
