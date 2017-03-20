@@ -38,7 +38,7 @@ def monitor(regex):
 						print "File being accessed at " + time.ctime() + " by process " + str(pinfo['pid'])
 						
 						proci.suspend()
-						
+						'''
 						offpid = pinfo['pid']
 
 						randdump = "[" + str(time.time()) + "]dump_" + str(offpid) + ".dmp" ;
@@ -47,10 +47,12 @@ def monitor(regex):
 						dumpcmd = str(os.getcwd()) + '\MemoryDD.bat'
 	#					
 						admin.command(dumpcmd)	
+
 						#cmdblock = subprocess.Popen(dumpcmd, shell=True, stdout = subprocess.PIPE)
 						#cmdblock.wait()
 						
 						proci.kill()	
+						'''
 						
 						return True
 					
