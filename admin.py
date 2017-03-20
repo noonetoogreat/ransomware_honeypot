@@ -5,7 +5,6 @@ import ctypes
 
 def command(argv=None, debug=True):
     shell32 = ctypes.windll.shell32
-    '''
     if argv is None and shell32.IsUserAnAdmin():
         return True
 
@@ -18,13 +17,12 @@ def command(argv=None, debug=True):
         arguments = map(unicode, argv)
     argument_line = u' '.join(arguments)
     executable = unicode("MemoryDD.bat")
-    '''
     if debug:
         print 'Command line: ', executable, argument_line
-    ret = shell32.ShellExecuteW(None, u"runas", argv, "", None, 1)
+    ret = shell32.ShellExecuteW(None, u"runas", executable, argument_line, None, 1)
     if int(ret) <= 32:
         return False
-    return True
+    return None
 
 
 if __name__ == '__main__':
