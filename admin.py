@@ -15,11 +15,11 @@ def command(argv=None, debug=True):
         arguments = map(unicode, argv[1:])
     else:
         arguments = map(unicode, argv)
-    argument_line = u''.join(arguments)
-    executable = unicode("open")
+    argument_line = u' '.join(arguments)
+    executable = unicode("C:\Windows\System32\cmd.exe")
     if debug:
         print 'Command line: ', executable, argument_line
-    ret = shell32.ShellExecuteW(None, u"open", argument_line, None, None, 1)
+    ret = shell32.ShellExecuteW(None, u"runas", executable, '/k ' + argument_line, None, 1)
     if int(ret) <= 32:
         return False
     return None
