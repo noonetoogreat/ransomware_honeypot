@@ -43,11 +43,10 @@ def monitor(regex):
 						randdump = "[" + str(time.time()) + "]dump_" + str(offpid) + ".dmp" ;
 						print "Dumpfile: " + randdump
 				
-						dumpcmd = 'ProcessDD.bat -pid ' + str(offpid)	
-						
-						rc = admin.command(dumpcmd)
-						while rc is False:
-							time.sleep(1)
+						dumpcmd = 'ProcessDD.bat -p ' + str(offpid) + ' -ouput ./' + randdump
+	#						
+						cmdblock = subprocess.call(['runas', '/user:Administrator', dumpcmd])
+						cmdblock.wait()
 						
 						proci.kill()	
 						
