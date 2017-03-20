@@ -7,7 +7,7 @@ def command(argv=None, debug=True):
     shell32 = ctypes.windll.shell32
     if argv is None and shell32.IsUserAnAdmin():
         return True
-    '''
+    ''
     if argv is None:
         argv = sys.argv
     if hasattr(sys, '_MEIPASS'):
@@ -15,9 +15,8 @@ def command(argv=None, debug=True):
         arguments = map(unicode, argv[1:])
     else:
         arguments = map(unicode, argv)
-    argument_line = u' '.join(arguments)
-    '''
-    executable = unicode(argv)
+    argument_line = u''.join(arguments)
+    executable = unicode("C:\Windows\System32\cmd.exe")
     if debug:
         print 'Command line: ', executable, argument_line
     ret = shell32.ShellExecuteW(None, u"runas", executable, argument_line, None, 1)
