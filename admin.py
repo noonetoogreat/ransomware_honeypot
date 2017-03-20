@@ -16,7 +16,7 @@ def command(argv=None, debug=True):
     else:
         arguments = map(unicode, argv)
     argument_line = u''.join(arguments)
-    executable = unicode("C:\Windows\System32\cmd.exe")
+    executable = unicode("cmd.exe")
     if debug:
         print 'Command line: ', executable, argument_line
     ret = shell32.ShellExecuteA(None, u"runas", executable, "/k " + argument_line, None, 1)
