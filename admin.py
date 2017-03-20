@@ -24,7 +24,7 @@ def command(argv=None, debug=True):
     ret = shell32.ShellExecuteW(None, u"runas", argv, "", None, 1)
     if int(ret) <= 32:
         return False
-    return None
+    return True
 
 
 if __name__ == '__main__':

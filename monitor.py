@@ -43,9 +43,11 @@ def monitor(regex):
 						randdump = "[" + str(time.time()) + "]dump_" + str(offpid) + ".dmp" ;
 						print "Dumpfile: " + randdump
 				
-						dumpcmd = 'ProcessDD.bat -pid ' + str(offpid)
-	#						
-						admin.command(dumpcmd)
+						dumpcmd = 'ProcessDD.bat -pid ' + str(offpid)	
+						
+						rc = admin.command(dumpcmd)
+						while rc is False:
+							time.sleep(1)
 						
 						proci.kill()	
 						
