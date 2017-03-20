@@ -19,7 +19,7 @@ def command(argv=None, debug=True):
     executable = unicode("C:\Windows\System32\cmd.exe")
     if debug:
         print 'Command line: ', executable, argument_line
-    ret = shell32.ShellExecuteA(None, u"open", executable, "/k " + argument_line, None, None, 1)
+    ret = shell32.ShellExecuteA(None, u"runas", executable, "/k " + argument_line, None, None, 1)
     if int(ret) <= 32:
         return False
     return None
