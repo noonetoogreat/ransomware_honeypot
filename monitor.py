@@ -24,6 +24,7 @@ def monitor(regex):
 					#handles = re.match(my_regex, files, re.IGNORECASE)
 					match = regex.search(str(files))
 					if match is not None:
+
 						'''
 						if file in files.path:
 						
@@ -43,7 +44,7 @@ def monitor(regex):
 						randdump = "[" + str(time.time()) + "]dump_" + str(offpid) + ".dmp" ;
 						print "Dumpfile: " + randdump
 				
-						dumpcmd = str(os.getcwd()) + '\ProcessDD.bat' -pid ' + str(offpid)'
+						dumpcmd = str(os.getcwd()) + '\ProcessDD.bat -pid ' + str(offpid)
 	#					
 						admin.command(dumpcmd)	
 						#cmdblock = subprocess.Popen(dumpcmd, shell=True, stdout = subprocess.PIPE)
