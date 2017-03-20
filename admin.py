@@ -1,89 +1,39 @@
-#!/usr/bin/env python
-# -*- coding: utf-8; mode: python; py-indent-offset: 4; indent-tabs-mode: nil -*-
-# vim: fileencoding=utf-8 tabstop=4 expandtab shiftwidth=4
+#!python
+# coding: utf-8
+import sys
+import ctypes
 
-# (C) COPYRIGHT © Preston Landers 2010
-# Released under the same license as Python 2.6.5
+def command(argv=None, debug=True):
+    shell32 = ctypes.windll.shell32
+    '''
+    if argv is None and shell32.IsUserAnAdmin():
+        return True
 
-
-import sys, os, traceback, types
-
-def isUserAdmin():
-
-    if os.name == 'nt':
-        import ctypes
-        # WARNING: requires Windows XP SP2 or higher!
-        try:
-            return ctypes.windll.shell32.IsUserAnAdmin()
-        except:
-            traceback.print_exc()
-            print "Admin check failed, assuming not an admin."
-            return False
-    elif os.name == 'posix':
-        # Check for root on Posix
-        return os.getuid() == 0
+    if argv is None:
+        argv = sys.argv
+    if hasattr(sys, '_MEIPASS'):
+        # Support pyinstaller wrapped program.
+        arguments = map(unicode, argv[1:])
     else:
-        raise RuntimeError, "Unsupported operating system for this module: %s" % (os.name,)
+        arguments = map(unicode, argv)
+    argument_line = u' '.join(arguments)
+    executable = unicode("MemoryDD.bat")
+    '''
+    if debug:
+        print 'Command line: ', executable, argument_line
+    ret = shell32.ShellExecuteW(None, u"runas", argv, "", None, 1)
+    if int(ret) <= 32:
+        return False
+    return None
 
-def runAsAdmin(cmdLine=None, wait=True):
 
-    if os.name != 'nt':
-        raise RuntimeError, "This function is only implemented on Windows."
-
-    import win32api, win32con, win32event, win32process
-    from win32com.shell.shell import ShellExecuteEx
-    from win32com.shell import shellcon
-
-    python_exe = sys.executable
-
-    if cmdLine is None:
-        cmdLine = [python_exe] + sys.argv
-    elif type(cmdLine) not in (types.TupleType,types.ListType):
-        raise ValueError, "cmdLine is not a sequence."
-    cmd = '"%s"' % (cmdLine[0],)
-    # XXX TODO: isn't there a function or something we can call to massage command line params?
-    params = " ".join(['"%s"' % (x,) for x in cmdLine[1:]])
-    cmdDir = ''
-    showCmd = win32con.SW_SHOWNORMAL
-    #showCmd = win32con.SW_HIDE
-    lpVerb = 'runas'  # causes UAC elevation prompt.
-
-    # print "Running", cmd, params
-
-    # ShellExecute() doesn't seem to allow us to fetch the PID or handle
-    # of the process, so we can't get anything useful from it. Therefore
-    # the more complex ShellExecuteEx() must be used.
-
-    # procHandle = win32api.ShellExecute(0, lpVerb, cmd, params, cmdDir, showCmd)
-
-    procInfo = ShellExecuteEx(nShow=showCmd,
-                              fMask=shellcon.SEE_MASK_NOCLOSEPROCESS,
-                              lpVerb=lpVerb,
-                              lpFile=cmd,
-                              lpParameters=params)
-
-    if wait:
-        procHandle = procInfo['hProcess']    
-        obj = win32event.WaitForSingleObject(procHandle, win32event.INFINITE)
-        rc = win32process.GetExitCodeProcess(procHandle)
-        #print "Process handle %s returned code %s" % (procHandle, rc)
+if __name__ == '__main__':
+    ret = command()
+    if ret is True:
+        print 'I have admin privilege.'
+        raw_input('Press ENTER to exit.')
+    elif ret is None:
+        print 'I am elevating to admin privilege.'
+        raw_input('Press ENTER to exit.')
     else:
-        rc = None
-
-    return rc
-
-def test():
-    rc = 0
-    if not isUserAdmin():
-        print "You're not an admin.", os.getpid(), "params: ", sys.argv
-        #rc = runAsAdmin(["c:\\Windows\\notepad.exe"])
-        rc = runAsAdmin()
-    else:
-        print "You are an admin!", os.getpid(), "params: ", sys.argv
-        rc = 0
-    x = raw_input('Press Enter to exit.')
-    return rc
-
-
-if __name__ == "__main__":
-    sys.exit(test())
+        print 'Error(ret=%d): cannot elevate privilege.' % (ret, )

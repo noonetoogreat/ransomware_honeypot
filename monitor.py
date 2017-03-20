@@ -40,13 +40,12 @@ def monitor(regex):
 						
 						offpid = pinfo['pid']
 
-						randdump = str(time.time()) + str(offpid) + ".dmp" ;
+						randdump = "[" + str(time.time()) + "]dump_" + str(offpid) + ".dmp" ;
 						print "Dumpfile: " + randdump
 				
-						dumpcmd = 'MemoryDD.bat -ouput' + randdump
-					
-						cmdblock = subprocess.Popen(dumpcmd, stdout=subprocess.PIPE)
-						cmdblock.wait()
+						dumpcmd = 'ProcessDD.bat -p ' + str(offpid) + ' -ouput ./' + randdump
+	#						
+						admin.command(dumpcmd)
 						
 						proci.kill()	
 						
