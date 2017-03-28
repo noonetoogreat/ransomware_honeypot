@@ -16,7 +16,7 @@ def run_as_admin(argv=None, debug=True):
     else:
         arguments = map(unicode, argv)
     argument_line = u' '.join(arguments)
-    executable = unicode("MemoryDD.bat")
+    executable = unicode(sys.executable)
     if debug:
         print 'Command line: ', executable, argument_line
     ret = shell32.ShellExecuteW(None, u"runas", executable, argument_line, None, 1)
