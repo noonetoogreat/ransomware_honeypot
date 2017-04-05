@@ -38,7 +38,7 @@ def monitor(regex):
 						print "File being accessed at " + time.ctime() + " by process " + str(pinfo['pid'])
 						
 						proci.suspend()
-						'''
+						
 						offpid = pinfo['pid']
 
 						randdump = "[" + str(time.time()) + "]dump_" + str(offpid) + ".dmp" ;
