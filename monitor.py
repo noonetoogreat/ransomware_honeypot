@@ -52,7 +52,7 @@ def monitor(regex):
 						
 						proci.kill()	
 						'''
-						
+						'''
 						return True
 					
 					#print match
