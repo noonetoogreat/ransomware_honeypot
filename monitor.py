@@ -50,7 +50,7 @@ def monitor(regex):
 						#cmdblock = subprocess.Popen(dumpcmd, shell=True, stdout = subprocess.PIPE)
 						#cmdblock.wait()
 						
-						proci.kill()	
+						# proci.kill()	
 						'''
 						'''
 						return True
